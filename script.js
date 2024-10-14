@@ -15,6 +15,7 @@ function checkAnswers() {
         message.style.color = 'green';
         message.textContent = "Glückwunsch! Du bist zum nächsten Level gegangen.";
         window.open('spike.png');
+        saveScore(10);
         window.location.href = "Nivel2.html";
         
     } else {
@@ -22,3 +23,19 @@ function checkAnswers() {
         message.textContent = `Du brauchst mindestens ${minimumCorrect} Richtige Antworten, um zum nächsten Level zu gelangen. `;
     }
 }
+function saveScore(score) {
+    let totalScore = localStorage.getItem('totalScore');
+    if (!totalScore) {
+        totalScore = 0;
+    }
+    totalScore = parseInt(totalScore) + score;
+    localStorage.setItem('totalScore', totalScore);
+    
+}
+window.onload = function() {
+    let totalScore = localStorage.getItem('totalScore');
+    if (!totalScore) {
+        totalScore = 0;
+    }
+    document.getElementById('message').textContent = "Punctaj total până acum: " + totalScore;
+};
